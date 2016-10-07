@@ -1,17 +1,13 @@
 #!/bin/bash
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-file="$DIR/data/"`date "+%Y-%m-%d"`
+: ${ZENDIR:="$HOME/.zentracker"}
+file="$ZENDIR/"`date "+%Y-%m-%d"`
 if [ ! -f "$file" ]; then
     touch "$file"
     exit 1
 fi
 
 text=`cat $file`
-
-# while read IN; do
-#     echo "$IN"
-# done <<< "$text"
 
 function convert_min_to_hour()
 {

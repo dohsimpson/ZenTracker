@@ -1,14 +1,12 @@
 #!/bin/bash
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-PATH="$DIR:$PATH"
-DATA_DIR="$HOME/.zentracker"
+: ${ZENDIR:="$HOME/.zentracker"}
 
 function init()
 {
-    if [ ! -d "$DATA_DIR" ]; then
+    if [ ! -d "$ZENDIR" ]; then
         echo "Creating directory $DATA_DIR..."
-        mkdir -p "$DATA_DIR"
+        mkdir -p "$ZENDIR"
     fi
 }
 
@@ -34,7 +32,7 @@ EOF)
 
 function log_activity()
 {
-    file="$DATA_DIR/"`date "+%Y-%m-%d"`
+    file="$ZENDIR/"`date "+%Y-%m-%d"`
     if [ ! -f "$file" ]; then
         touch "$file"
     fi

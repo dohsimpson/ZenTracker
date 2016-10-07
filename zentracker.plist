@@ -1,0 +1,10 @@
+<plist version="1.0">
+ <dict>
+   <key>Label</key>
+   <string>zentracker</string>
+   <key>RunAtLoad</key>
+   <true />
+   <key>Program</key>
+   <string>/usr/local/bin/zentrackerd</string>
+  </dict>
+</plist>
