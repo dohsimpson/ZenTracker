@@ -1,0 +1,60 @@
+#!/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PATH="$DIR:$PATH"
+DATA_DIR="$HOME/.zentracker"
+
+function init()
+{
+    if [ ! -d "$DATA_DIR" ]; then
+        echo "Creating directory $DATA_DIR..."
+        mkdir -p "$DATA_DIR"
+    fi
+}
+
+function get_current_activity()
+{
+    local v=$(cat <<EOF
+tell application "System Events"
+set frontApp to the name of the first application process whose frontmost is true
+end tell
+try
+tell application frontApp to set frontDocument to the name of the front document
+on error
+try
+tell application frontApp to set frontDocument to the name of the front window
+on error
+set frontDocument to ""
+end try
+end try
+get frontApp & "\n" & frontDocument
+EOF)
+    /usr/bin/osascript -e "$v"
+}
+
+function log_activity()
+{
+    file="$DATA_DIR/"`date "+%Y-%m-%d"`
+    if [ ! -f "$file" ]; then
+        touch "$file"
+    fi
+    # read from applescript
+    read frontApp
+    read frontDocument
+    now=`date "+%H:%M"`
+    echo -e "$now""\t""$frontApp""\t""$frontDocument" >> "$file"
+}
+
+function sleep_till_next_min()
+{
+    local v=`date '+%S'`
+    ((sec=60-10#"$v"))
+    echo "$sec"
+}
+
+echo "ZenTracker is running..."
+init
+while true; do
+    get_current_activity | log_activity
+    sleep $(sleep_till_next_min)
+done
