@@ -3,6 +3,8 @@ ZenTracker is a simple command-line based Time Tracker for Mac OS X. It consists
 
 Since all the tracking data is stored as text files(named in the format `YYYY-MM-DD`) in a directory, it is very easy to write small scripts that parse and generate the reports that you want specifically.
 
+![example image](https://raw.githubusercontent.com/dohsimpson/ZenTracker/master/example1.png)
+
 ## Installation
 ### Run Daemon in the Foreground
 There are nothing to be installed since everything is written in bash. After cloning this repository, run the tracking daemon, execute the `zentrackerd` script, to see activity summary report, execute `zentracker` script, you may need to `chmod +x` those scripts if they are not executable.
