@@ -4,10 +4,10 @@ ZenTracker is a simple command-line based Time Tracker for Mac OS X. It consists
 Since all the tracking data is stored as text files(named in the format `YYYY-MM-DD`) in a directory, it is very easy to write small scripts that parse and generate the reports that you want specifically.
 
 ## Installation
-### Daemon not running at boot-time
+### Run Daemon in the Foreground
 There are nothing to be installed since everything is written in bash. After cloning this repository, run the tracking daemon, execute the `zentrackerd` script, to see activity summary report, execute `zentracker` script, you may need to `chmod +x` those scripts if they are not executable.
 
-### Daemon running at boot-time
+### Run Daemon at boot-time
 To actually make it useful, you probably want to have the tracking daemon running at computer boot-time. In Mac OS X, start-up programs are managed by apple's __launchctl__, which requires start-up programs to have a _plist_ file installed by launchctl.
 
 There is a simpler way(simpler in term of installing, upgrading and uninstalling), [Homebrew](https://github.com/Homebrew/brew) offers a way to manage the installation of _plist_ files to launchctl, and therefore it is the recommended way to install ZenTracker. The procedure follows:
@@ -19,6 +19,7 @@ I am still waiting for Homebrew to approve the formula. Before that, you will ha
 brew create zentracker https://github.com/dohsimpson/ZenTracker/archive/master.zip
 ```
 Use the default formula name: zentracker.
+
 2. Edit the formula by copy pasting the following code to the formula file:
 ```ruby
 class Zentracker < Formula
@@ -56,14 +57,18 @@ class Zentracker < Formula
   end
 end
 ```
+
 3. Install the formula
+
 ```bash
 brew install zentracker
 ```
+
 4. Add ZenTracker to startup item using `brew service` command
 ```bash
 brew services start zentracker
 ```
+
 5. Uninstall
 ```bash
 brew services stop zentracker
