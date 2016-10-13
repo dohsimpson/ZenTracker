@@ -7,7 +7,7 @@ Since all the tracking data is stored as text files(named in the format `YYYY-MM
 
 ## Installation
 ### Run Daemon in the Foreground
-There are nothing to be installed since everything is written in bash. After cloning this repository, run the tracking daemon, execute the `zentrackerd` script, to see activity summary report, execute `zentracker` script, you may need to `chmod +x` those scripts if they are not executable.
+There is nothing to be installed since everything is written in bash. After cloning this repository, run the tracking daemon, execute the `zentrackerd` script, to see activity summary report, execute `zentracker` script, you may need to `chmod +x` those scripts if they are not executable.
 
 ### Run Daemon at boot-time
 To actually make it useful, you probably want to have the tracking daemon running at computer boot-time. In Mac OS X, start-up programs are managed by apple's __launchctl__, which requires start-up programs to have a _plist_ file installed by launchctl.
