@@ -47,12 +47,12 @@ function details()
     echo "$text"
 }
 
-p=""
-p="$p""Total Time: `total_time`""\n"
-p="$p""By Hours: ""\n"
+p="ZenTracker Daily Report\n"
+p="$p""[TOTAL TIME] `total_time`""\n"
+p="$p""[BY HOURS] "
 p="$p`on_by_hours`""\n"
-p="$p""By Applications: ""\n"
+p="$p""[BY APPLICATIONS] ""\n"
 p="$p`by_application`""\n"
-p="$p""----------""\n"
-p="$p`details`""\n"
+p="$p""[DETAILS]""\n"
+p="$p`details`"
 echo -e "$p" | less
