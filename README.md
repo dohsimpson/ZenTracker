@@ -15,68 +15,67 @@ There is a simpler way(simpler in term of installing, upgrading and uninstalling
 I am still waiting for Homebrew to approve the formula. Before that, you will have to do it the complex way:
 
 1. Create a brew formula:
-```bash
-brew create zentracker https://github.com/dohsimpson/ZenTracker/archive/master.zip
-```
-Use the default formula name: zentracker.
+    ```bash
+    brew create zentracker https://github.com/dohsimpson/ZenTracker/archive/master.zip
+    ```
+    Use the default formula name: zentracker.
 
 2. Edit the formula by copy pasting the following code to the formula file:
-```ruby
-class Zentracker < Formula
-  desc "Command Line Automatic Time Tracker for OSX"
-  homepage "https://github.com/dohsimpson/ZenTracker"
-  url "https://github.com/dohsimpson/ZenTracker/archive/master.zip"
-  version "0.0.1"
-  sha256 ""
+    ```ruby
+    class Zentracker < Formula
+      desc "Command Line Automatic Time Tracker for OSX"
+      homepage "https://github.com/dohsimpson/ZenTracker"
+      url "https://github.com/dohsimpson/ZenTracker/archive/master.zip"
+      version "0.0.1"
+      sha256 ""
 
-  def install
-    bin.install "zentrackerd"
-    bin.install "zentracker"
-  end
+      def install
+        bin.install "zentrackerd"
+        bin.install "zentracker"
+      end
 
-  def plist; <<-EOS.undent
-    <?xml version="1.0" encoding="UTF-8"?>
-    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-    <plist version="1.0">
-    <dict>
-      <key>KeepAlive</key>
-      <true/>
-      <key>Label</key>
-      <string>#{plist_name}</string>
-      <key>Program</key>
-      <string>#{opt_bin}/zentrackerd</string>
-      <key>RunAtLoad</key>
-      <true/>
-    </dict>
-    </plist>
-    EOS
-  end
+      def plist; <<-EOS.undent
+        <?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+        <plist version="1.0">
+        <dict>
+          <key>KeepAlive</key>
+          <true/>
+          <key>Label</key>
+          <string>#{plist_name}</string>
+          <key>Program</key>
+          <string>#{opt_bin}/zentrackerd</string>
+          <key>RunAtLoad</key>
+          <true/>
+        </dict>
+        </plist>
+        EOS
+      end
 
-  test do
-    system "zentracker"
-  end
-end
-```
+      test do
+        system "zentracker"
+      end
+    end
+    ```
 
 3. Install the formula
-
-```bash
-brew install zentracker
-```
+    ```bash
+    brew install zentracker
+    ```
 
 4. Add ZenTracker to startup item using `brew service` command
-```bash
-brew services start zentracker
-```
+    ```bash
+    brew services start zentracker
+    ```
 
 5. Uninstall
-```bash
-brew services stop zentracker
-brew uninstall zentracker
+    ```bash
+    brew services stop zentracker
+    brew uninstall zentracker
 # if you want to remove formula completely from brew
-cd  /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core/Formula/
-rm zentracker.rb
-```
+    cd  /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core/Formula/
+    rm zentracker.rb
+    ```
 
 ## Usage
 As the daemon is started and running in the background. You can run `zentracker` in command line to view a summary of your activities of the day. Enjoy!
