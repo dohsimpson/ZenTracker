@@ -9,6 +9,34 @@ fi
 
 text=`cat $file`
 
+function colorize() {
+    case "$1" in
+        underline)
+            local color_start=$(tput sgr 0 1);;
+        bold)
+            local color_start=$(tput bold);;
+        red)
+            local color_start=$(tput setaf 1);;
+        green)
+            local color_start=$(tput setaf 2);;
+        yellow)
+            local color_start=$(tput setaf 3);;
+        blue)
+            local color_start=$(tput setaf 4);;
+        purple)
+            local color_start=$(tput setaf 5);;
+        cyan)
+            local color_start=$(tput setaf 6);;
+        white)
+            local color_start=$(tput setaf 7);;
+    esac
+
+    shift
+    local color_reset=$(tput sgr0)
+
+    echo "${color_start}$*${color_reset}"
+}
+
 function convert_min_to_hour()
 {
     read v
@@ -47,12 +75,13 @@ function details()
     echo "$text"
 }
 
-p="ZenTracker Daily Report\n"
-p="$p""[TOTAL TIME] `total_time`""\n"
-p="$p""[BY HOURS] "
-p="$p`on_by_hours`""\n"
-p="$p""[BY APPLICATIONS] ""\n"
-p="$p`by_application`""\n"
-p="$p""[DETAILS]""\n"
-p="$p`details`"
+p=`colorize red "ZenTracker Daily Report\n"`
+p=$p`colorize green "[TOTAL TIME] "`
+p=$p`total_time`"\n"
+p=$p`colorize green "[BY HOURS] "`
+p=$p`on_by_hours`"\n"
+p=$p`colorize green "[BY APPLICATIONS]\n"`
+p=$p`by_application`"\n"
+p=$p`colorize green "[DETAILS]\n"`
+p=$p`details`
 echo -e "$p" | less
