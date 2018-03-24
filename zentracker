@@ -37,6 +37,7 @@ function colorize() {
 
         echo "${color_start}$*${color_reset}"
     else
+        shift
         echo "$*"
     fi
 }
