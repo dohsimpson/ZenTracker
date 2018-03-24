@@ -10,31 +10,35 @@ fi
 text=`cat $file`
 
 function colorize() {
-    case "$1" in
-        underline)
-            local color_start=$(tput sgr 0 1);;
-        bold)
-            local color_start=$(tput bold);;
-        red)
-            local color_start=$(tput setaf 1);;
-        green)
-            local color_start=$(tput setaf 2);;
-        yellow)
-            local color_start=$(tput setaf 3);;
-        blue)
-            local color_start=$(tput setaf 4);;
-        purple)
-            local color_start=$(tput setaf 5);;
-        cyan)
-            local color_start=$(tput setaf 6);;
-        white)
-            local color_start=$(tput setaf 7);;
-    esac
+    if [ -t 1 ]; then
+        case "$1" in
+            underline)
+                local color_start=$(tput sgr 0 1);;
+            bold)
+                local color_start=$(tput bold);;
+            red)
+                local color_start=$(tput setaf 1);;
+            green)
+                local color_start=$(tput setaf 2);;
+            yellow)
+                local color_start=$(tput setaf 3);;
+            blue)
+                local color_start=$(tput setaf 4);;
+            purple)
+                local color_start=$(tput setaf 5);;
+            cyan)
+                local color_start=$(tput setaf 6);;
+            white)
+                local color_start=$(tput setaf 7);;
+        esac
 
-    shift
-    local color_reset=$(tput sgr0)
+        shift
+        local color_reset=$(tput sgr0)
 
-    echo "${color_start}$*${color_reset}"
+        echo "${color_start}$*${color_reset}"
+    else
+        echo "$*"
+    fi
 }
 
 function convert_min_to_hour()
