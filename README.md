@@ -22,7 +22,7 @@ bash uninstall.sh
 
 Zentracker is collecting activities at the background. See it in action with `ps aux | grep zentrackerd`.
 
-Get the daily summary with command `zentracker`, press `q` to exit.
+Get the daily summary with command `zentracker`, press `q` to exit. Get yesterday's summary with `zentracker -1`, and so on.
 
 ## Architecture
 ZenTracker consists of 2 components: a tracking daemon that checks the front-most application every minute; and a cli script that generates a summary for the tracked activities of the day.
