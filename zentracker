@@ -1,7 +1,13 @@
 #!/bin/bash
 
 : ${ZENDIR:="$HOME/.zentracker"}
-file="$ZENDIR/"`date "+%Y-%m-%d"`
+if [[ -n "$1" ]]; then
+    DATE=$(date -v "$1"d "+%Y-%m-%d")
+else
+    DATE=$(date "+%Y-%m-%d")
+fi
+
+file="$ZENDIR/$DATE"
 if [ ! -f "$file" ]; then
     touch "$file"
     exit 1
@@ -76,6 +82,7 @@ function details()
 }
 
 p=`colorize red "ZenTracker Daily Report\n"`
+p=$p`colorize purple "$DATE\n"`
 p=$p`colorize green "[TOTAL TIME] "`
 p=$p`total_time`"\n"
 p=$p`colorize green "[BY HOURS] "`
