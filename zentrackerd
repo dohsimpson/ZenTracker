@@ -14,17 +14,18 @@ function get_current_activity()
 {
     local v=$(cat <<EOF
 tell application "System Events"
-set frontApp to the title of the first application process whose frontmost is true
-end tell
+set frontApp to the name of the first application process whose frontmost is true
+set appID to id of application process frontApp
 try
-tell application frontApp to set frontDocument to the name of the front document
+tell (process id appID) to set frontDocument to the name of the front document
 on error
 try
-tell application frontApp to set frontDocument to the name of the front window
+tell (process id appID) to set frontDocument to the name of the front window
 on error
 set frontDocument to ""
 end try
 end try
+end tell
 get frontApp & "\n" & frontDocument
 EOF)
     /usr/bin/osascript -e "$v"
