@@ -54,7 +54,7 @@ function convert_min_to_hour()
 function do_format()
 {
     while read IN; do
-        echo -e $(echo "$IN" | cut -d' ' -f 1)"\t"$(echo "$IN" | cut -d' ' -f 2 | convert_min_to_hour)
+        echo -e $(echo "$IN" | cut -d';' -f 1)"\t"$(echo "$IN" | cut -d';' -f 2 | convert_min_to_hour)
     done <<< "$1"
 }
 
@@ -67,7 +67,7 @@ function on_by_hours()
 
 function by_application()
 {
-    local v=`echo "$text" | cut -f 2 | sort | uniq -c | sort -nr | sed -E 's/^ *([0-9]+) (.+) */\2 \1/'`
+    local v=`echo "$text" | cut -f 2 | sort | uniq -c | sort -nr | sed -E 's/^ *([0-9]+) (.+) */\2\;\1/'`
     do_format "$v"
 }
 
